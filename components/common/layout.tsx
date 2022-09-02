@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "./footer";
 import Header from "./header";
 type LayoutProps = {
-  title: string;
+  title?: string;
   children: JSX.Element;
 };
 const Layout = ({ title, children }: LayoutProps) => {
