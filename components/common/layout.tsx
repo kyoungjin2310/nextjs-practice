@@ -9,7 +9,7 @@ const Layout = ({ title, children }: LayoutProps) => {
   return (
     <>
       <Header />
-      <h1>{title}</h1>
+      <h1 className="text-3xl font-bold underline">{title}</h1>
       <div>{children}</div>
       <Footer />
     </>
