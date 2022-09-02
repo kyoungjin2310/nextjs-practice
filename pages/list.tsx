@@ -1,10 +1,11 @@
 import React from "react";
+import Layout from "../components/common/layout";
 
 const List = () => {
   return (
-    <div>
-      <h1>list</h1>
-    </div>
+    <Layout title={"list"}>
+      <h1>blabla</h1>
+    </Layout>
   );
 };
 
