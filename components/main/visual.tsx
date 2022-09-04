@@ -1,4 +1,5 @@
 import React from "react";
+import VisualTitle from "../styled/title/visualTitle";
 import VisualAni from "../styled/visualIcon";
 
 const Visual = () => {
@@ -6,11 +7,10 @@ const Visual = () => {
     <section className="flex min-h-screen flex-col items-center justify-center text-gray-600 body-font">
       <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
         <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-            Everything you need for
-            <br className="hidden lg:inline-block" />
-            Process automation
-          </h1>
+          <VisualTitle
+            txt="Everything you need for"
+            nextTxt="Process automation"
+          />
           <p className="mb-8 leading-relaxed">
             One size doesn’t fit all. Do your workloads require upfront
             capacity? Spikes for seasonal workloads? Extra resources for
