@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import DarkModeToggleBtn from "../styled/btn/darkmodeToggleBtn";
+import DarkModeToggleBtn from "../styled/btn/darkModeToggleBtn";
 
 const Header = () => {
   return (

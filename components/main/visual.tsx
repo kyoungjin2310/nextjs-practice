@@ -1,6 +1,6 @@
 import React from "react";
 import VisualTitle from "../styled/title/visualTitle";
-import VisualAni from "../styled/visualIcon";
+import VisualAni from "../styled/icon/visualIcon";
 
 const Visual = () => {
   return (
