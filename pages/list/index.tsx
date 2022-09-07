@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../../components/common/layout";
 import { TOKEN, DATABASE_ID } from "../../config/index";
+import { NotionList } from "../../modules/notionDBType";
 
 const List = () => {
   return (
@@ -40,7 +41,7 @@ export async function getServerSideProps() {
   const projects = await res.json();
 
   const projectNames = projects.results?.map(
-    (aProject: any) => aProject.properties.Project.title[0].plain_text
+    (aProject: NotionList) => aProject.properties.Project.title[0].plain_text
   );
 
   console.log(projectNames);
