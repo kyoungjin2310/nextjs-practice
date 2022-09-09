@@ -1,9 +1,13 @@
+import { NextPage } from "next";
 import React from "react";
 import Layout from "../../components/common/layout";
 import { TOKEN, DATABASE_ID } from "../../config/index";
-import { NotionList } from "../../modules/notionDBType";
+import { NotionList, NotionDatabase } from "../../modules/notionDBType";
+type PageProps = {
+  projects: NotionDatabase;
+};
 
-const List = () => {
+const List: NextPage<PageProps> = ({ projects }) => {
   return (
     <Layout title={"list"}>
       <h1>blabla</h1>
