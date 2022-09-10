@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
 import Layout from "../../components/common/layout";
+import NotionItems from "../../components/lists/notionItems";
 import { TOKEN, DATABASE_ID } from "../../config/index";
 import { NotionList, NotionDatabase } from "../../modules/notionDBType";
 type PageProps = {
@@ -10,7 +11,12 @@ type PageProps = {
 const List: NextPage<PageProps> = ({ projects }) => {
   return (
     <Layout title={"list"}>
-      <h1>blabla</h1>
+      <>
+        <h1>blabla</h1>
+        {projects.results.map((list) => (
+          <NotionItems key={list.id} data={list} />
+        ))}
+      </>
     </Layout>
   );
 };
