@@ -12,8 +12,19 @@ const NotionItems = ({ data }: NotionItemsProps) => {
   const discription = data.properties.Description.rich_text[0].text.content;
   const imgSrc = data.cover?.external.url;
   return (
-    <div className="flex flex-col p-6 m-3 bg-slate-700 rounded-md">
-      {imgSrc && <Image src={imgSrc} />}
+    <div className="flex flex-col m-3 bg-slate-700 rounded-xl">
+      {imgSrc && (
+        <Image
+          className="rounded-t-xl"
+          src={imgSrc}
+          alt="cover image"
+          width="100%"
+          height="100%"
+          layout="responsive"
+          objectFit="none"
+          quality={100}
+        />
+      )}
       <h1>{title}</h1>
       <h3>{discription}</h3>
       <a href={github}>github 바로가기</a>
