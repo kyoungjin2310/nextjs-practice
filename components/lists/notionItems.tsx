@@ -11,8 +11,9 @@ const NotionItems = ({ data }: NotionItemsProps) => {
   const youtube = data.properties.youtube.url;
   const discription = data.properties.Description.rich_text[0].text.content;
   const imgSrc = data.cover?.external.url;
+  const tags = data.properties.Tag.multi_select;
   return (
-    <div className="flex flex-col m-3 bg-slate-700 rounded-xl">
+    <div className="customCard">
       {imgSrc && (
         <Image
           className="rounded-t-xl"
@@ -25,10 +26,22 @@ const NotionItems = ({ data }: NotionItemsProps) => {
           quality={100}
         />
       )}
-      <h1>{title}</h1>
-      <h3>{discription}</h3>
-      <a href={github}>github 바로가기</a>
-      <a href={youtube}>youtube 바로가기</a>
+      <div className="p-4 flex flex-col">
+        <h1 className="text-2xl  font-bold">{title}</h1>
+        <h2 className="mt-4 text-xl">{discription}</h2>
+        <a href={github}>github 바로가기</a>
+        <a href={youtube}>youtube 바로가기</a>
+        <div className="flex items-start mt-2">
+          {tags.map((tag) => (
+            <h3
+              className="px-2 py-1 mr-2 rounded-md bg-sky-200 dark:bg-sky-700 w-30"
+              key={tag.id}
+            >
+              {tag.name}
+            </h3>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

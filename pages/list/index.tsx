@@ -11,12 +11,17 @@ type PageProps = {
 const List: NextPage<PageProps> = ({ projects }) => {
   return (
     <Layout title={"list"}>
-      <>
-        <h1>blabla</h1>
-        {projects.results.map((list) => (
-          <NotionItems key={list.id} data={list} />
-        ))}
-      </>
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 mb-10">
+        <h1 className="text-4xl font-bold sm:text-6xl">
+          총 프로젝트:
+          <span className="pl-4 text-blue-500">{projects.results.length}</span>
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 py-10 m-6 gap-8 w-full">
+          {projects.results.map((list) => (
+            <NotionItems key={list.id} data={list} />
+          ))}
+        </div>
+      </div>
     </Layout>
   );
 };
