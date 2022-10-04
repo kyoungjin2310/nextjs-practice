@@ -59,7 +59,6 @@ export async function getServerSideProps() {
     (aProject: NotionList) => aProject.properties.Project.title[0].plain_text
   );
 
-  console.log(projectNames);
   return {
     props: { projects },
   };
