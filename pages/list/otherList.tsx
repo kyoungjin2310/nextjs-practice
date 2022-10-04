@@ -1,14 +1,23 @@
 import React, { ChangeEvent } from "react";
 import Layout from "../../components/common/layout";
-import { atom, useRecoilState } from "recoil";
+import { atom, useRecoilState, selector, useRecoilValue } from "recoil";
 
 const textState = atom({
   key: "textState",
   default: "",
 });
 
+const charCountState = selector({
+  key: "charCountState",
+  get: ({ get }) => {
+    const text = get(textState);
+    return text.length;
+  },
+});
+
 const OtherList = () => {
   const [text, setText] = useRecoilState(textState);
+  const count = useRecoilValue(charCountState);
   const onChange = (event: ChangeEvent) => {
     setText((event.target as HTMLTextAreaElement).value);
   };
@@ -26,7 +35,8 @@ const OtherList = () => {
             onChange={onChange}
           />
           <br />
-          Echo: {text}
+          <p> Echo: {text}</p>
+          <p>Character Count: {count}</p>;
         </div>
       </>
     </Layout>
