@@ -65,7 +65,7 @@ function TodoItemCreator() {
   return (
     <div>
       <input type="text" value={inputValue} onChange={onChange} />
-      <button onClick={addItem}>Add</button>
+      <button onClick={addItem}>추가</button>
     </div>
   );
 }
@@ -79,19 +79,31 @@ const TodoItem = ({ key, item }: TodoItemListProps) => {
     setInputValue((event.target as HTMLTextAreaElement).value);
   };
 
+  //li click
   const onClick = (text: string) => {
     setInputValue(text);
     setOpen(true);
   };
 
+  //edit
   const editItemText = (id: number) => {
     setTodoList(
-      todoList.map((user: TodoItem) =>
-        user.id === id ? { ...user, text: inputValue } : user
+      todoList.map((todo: TodoItem) =>
+        todo.id === id ? { ...todo, text: inputValue } : todo
       )
     );
     setOpen(false);
     setInputValue("");
+  };
+
+  //취소
+  const onCancel = () => {
+    setOpen(false);
+  };
+
+  //delete
+  const deleteItem = (id: number) => {
+    setTodoList(todoList.filter((todo) => todo.id !== id));
   };
 
   return (
@@ -100,9 +112,11 @@ const TodoItem = ({ key, item }: TodoItemListProps) => {
       {open && (
         <>
           <input type="text" value={inputValue} onChange={onChange} />
-          <button onClick={() => editItemText(item.id)}>submit</button>
+          <button onClick={() => editItemText(item.id)}>수정</button>
+          <button onClick={onCancel}>취소</button>
         </>
       )}
+      <button onClick={() => deleteItem(item.id)}>X</button>
     </li>
   );
 };
@@ -112,7 +126,7 @@ const OtherList = () => {
   return (
     <Layout title={"Other List"}>
       <>
-        <h1>blabla</h1>
+        <h1>todo List</h1>
         <TodoItemCreator />
         {todoList.map((todoItem: TodoItem) => (
           <TodoItem key={todoItem.id} item={todoItem} />
