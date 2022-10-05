@@ -96,6 +96,14 @@ const TodoItem = ({ key, item }: TodoItemListProps) => {
     setInputValue("");
   };
 
+  const handleToggle = (id: number) => {
+    setTodoList(
+      todoList.map((todo: TodoItem) =>
+        todo.id === id ? { ...todo, isComplete: !todo.isComplete } : todo
+      )
+    );
+  };
+
   //취소
   const onCancel = () => {
     setOpen(false);
@@ -108,7 +116,17 @@ const TodoItem = ({ key, item }: TodoItemListProps) => {
 
   return (
     <li>
-      {!open && <span onClick={() => onClick(item.text)}>{item.text}</span>}
+      {!open && (
+        <div className={item.isComplete ? `${"check"}` : undefined}>
+          <input
+            type="checkbox"
+            onChange={() => handleToggle(item.id)}
+            id={`${item.id}`}
+          />
+          <label htmlFor={`${item.id}`}>{item.text}</label>
+          <button onClick={() => onClick(item.text)}>수정</button>
+        </div>
+      )}
       {open && (
         <>
           <input type="text" value={inputValue} onChange={onChange} />
