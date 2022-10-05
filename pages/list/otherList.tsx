@@ -79,7 +79,8 @@ const TodoItem = ({ key, item }: TodoItemListProps) => {
     setInputValue((event.target as HTMLTextAreaElement).value);
   };
 
-  const onClick = () => {
+  const onClick = (text: string) => {
+    setInputValue(text);
     setOpen(true);
   };
 
@@ -90,11 +91,12 @@ const TodoItem = ({ key, item }: TodoItemListProps) => {
       )
     );
     setOpen(false);
+    setInputValue("");
   };
 
   return (
-    <li onClick={onClick}>
-      {!open && item.text}
+    <li>
+      {!open && <span onClick={() => onClick(item.text)}>{item.text}</span>}
       {open && (
         <>
           <input type="text" value={inputValue} onChange={onChange} />
