@@ -1,6 +1,11 @@
 import React, { useState, ChangeEvent, useRef } from "react";
 import Layout from "../../components/common/layout";
-import { atom, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  atom,
+  useRecoilValue,
+  useSetRecoilState,
+  useRecoilState,
+} from "recoil";
 
 //type
 type atomArray<T> = Array<T>;
@@ -13,7 +18,7 @@ type TodoItem = {
 
 type TodoItemListProps = {
   key: number;
-  item: string;
+  item: TodoItem;
 };
 
 //atom
@@ -39,8 +44,8 @@ const todoListState = atom<atomArray<TodoItem>>({
 });
 
 function TodoItemCreator() {
-  const [inputValue, setInputValue] = useState("");
-  const setTodoList = useSetRecoilState<Array<TodoItem>>(todoListState);
+  const [inputValue, setInputValue] = useState<string>("");
+  const setTodoList = useSetRecoilState<atomArray<TodoItem>>(todoListState);
   const addItemId = useRef<number>(4);
   const addItem = () => {
     setTodoList((oldTodoList) => [
@@ -66,7 +71,38 @@ function TodoItemCreator() {
 }
 
 const TodoItem = ({ key, item }: TodoItemListProps) => {
-  return <li>{item}</li>;
+  const [inputValue, setInputValue] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
+  const [todoList, setTodoList] =
+    useRecoilState<atomArray<TodoItem>>(todoListState);
+  const onChange = (event: ChangeEvent) => {
+    setInputValue((event.target as HTMLTextAreaElement).value);
+  };
+
+  const onClick = () => {
+    setOpen(true);
+  };
+
+  const editItemText = (id: number) => {
+    setTodoList(
+      todoList.map((user: TodoItem) =>
+        user.id === id ? { ...user, text: inputValue } : user
+      )
+    );
+    setOpen(false);
+  };
+
+  return (
+    <li onClick={onClick}>
+      {!open && item.text}
+      {open && (
+        <>
+          <input type="text" value={inputValue} onChange={onChange} />
+          <button onClick={() => editItemText(item.id)}>submit</button>
+        </>
+      )}
+    </li>
+  );
 };
 
 const OtherList = () => {
@@ -77,7 +113,7 @@ const OtherList = () => {
         <h1>blabla</h1>
         <TodoItemCreator />
         {todoList.map((todoItem: TodoItem) => (
-          <TodoItem key={todoItem.id} item={todoItem.text} />
+          <TodoItem key={todoItem.id} item={todoItem} />
         ))}
       </>
     </Layout>
