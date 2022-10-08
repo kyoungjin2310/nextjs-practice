@@ -122,6 +122,7 @@ const TodoItem = ({ key, item }: TodoItemListProps) => {
             type="checkbox"
             onChange={() => handleToggle(item.id)}
             id={`${item.id}`}
+            className="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
           />
           <label htmlFor={`${item.id}`}>{item.text}</label>
           <button onClick={() => onClick(item.text)}>수정</button>
@@ -129,7 +130,12 @@ const TodoItem = ({ key, item }: TodoItemListProps) => {
       )}
       {open && (
         <>
-          <input type="text" value={inputValue} onChange={onChange} />
+          <input
+            type="text"
+            value={inputValue}
+            onChange={onChange}
+            className="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+          />
           <button onClick={() => editItemText(item.id)}>수정</button>
           <button onClick={onCancel}>취소</button>
         </>
