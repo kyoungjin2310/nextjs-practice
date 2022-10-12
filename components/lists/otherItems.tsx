@@ -148,7 +148,7 @@ export const TodoItems = ({ item }: TodoItemListProps) => {
 };
 
 export const TodoItemContainer = () => {
-  const todoList = useRecoilValue(todoListState);
+  const todoList = useRecoilValue(filteredTodoListState);
   return (
     <>
       {todoList.map((todoItem: TodoItem) => (
@@ -201,8 +201,8 @@ const todoListFilterState = atom({
 const filteredTodoListState = selector({
   key: "filteredTodoListState",
   get: ({ get }) => {
-    const filter = get(todoListFilterState);
     const list = get(todoListState);
+    const filter = get(todoListFilterState);
 
     switch (filter) {
       case "Show Completed":
